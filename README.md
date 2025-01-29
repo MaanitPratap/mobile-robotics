@@ -2,6 +2,10 @@
 
 This repository contains code and instructions for operating the Duckiebot DB21M robot named `csc22905`.
 
+## Course Website
+
+https://sites.google.com/ualberta.ca/maanitpratap/home
+
 ## Robot Specifications
 
 - **Model**: Duckiebot DB21M
