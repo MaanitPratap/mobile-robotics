@@ -1,47 +1,96 @@
-# Template: template-basic
+# Duckiebot Repository (CSC22905)
 
-This template provides a boilerplate repository for developing non-ROS software
-in Duckietown.
+This repository contains code and instructions for operating the Duckiebot DB21M robot named `csc22905`.
 
-**NOTE:** If you want to develop software that uses ROS, check out
-[this template](https://github.com/duckietown/template-ros).
+## Robot Specifications
 
+- **Model**: Duckiebot DB21M
+- **Robot Name**: csc22905
+- **Dashboard**: csc22905.local
 
-## How to use it
+## Basic Operations
 
-### 1. Fork this repository
+### Discovery and Connection
+```bash
+# Discover active Duckiebots on Duckienet wifi
+dts fleet discover
 
-Use the fork button in the top-right corner of the github page to fork this template repository.
+# Ping robot to check connection
+ping csc22905.local
+```
 
+### Robot Control
+```bash
+# Control robot using keyboard
+dts duckiebot keyboard_control csc22905
 
-### 2. Create a new repository
+# Shutdown robot
+dts duckiebot shutdown csc22905.local
+```
 
-Create a new repository on github.com while
-specifying the newly forked template repository as
-a template for your new repository.
+### Calibration
+```bash
+# Camera intrinsics calibration
+dts duckiebot calibrate_intrinsics csc22905
 
+# Camera extrinsics calibration
+dts duckiebot calibrate_extrinsics csc22905
+```
 
-### 3. Define dependencies
+### Development Tools
+```bash
+# Start GUI tools
+dts start_gui_tools csc22905
 
-List the dependencies in the files `dependencies-apt.txt` and
-`dependencies-py3.txt` (apt packages and pip packages respectively).
+# Build locally
+dts devel build -f
 
+# Build on robot (ARM architecture)
+dts devel build -f --arch arm32v7 -H csc22905.local
+```
 
-### 4. Place your code
+## Running Demos
 
-Place your code in the directory `/packages/` of
-your new repository.
+### Lane Following Demo
+```bash
+dts duckiebot demo --demo_name lane_following --duckiebot_name csc22905 --package_name duckietown_demos
+```
 
+**Controls:**
+- Press 'a' to start demo
+- Press 's' to stop demo
 
-### 5. Setup launchers
+## Docker Operations
 
-The directory `/launchers` can contain as many launchers (launching scripts)
-as you want. A default launcher called `default.sh` must always be present.
+To run the mobile robotics container:
+```bash
+docker -H csc22905.local run -it --rm --net=host duckietown/mobile-robotics:v3-arm32v7
+```
 
-If you create an executable script (i.e., a file with a valid shebang statement)
-a launcher will be created for it. For example, the script file 
-`/launchers/my-launcher.sh` will be available inside the Docker image as the binary
-`dt-launcher-my-launcher`.
+## Robot Configuration
 
-When launching a new container, you can simply provide `dt-launcher-my-launcher` as
-command.
+### Setting Trim Parameter
+```bash
+rosparam set /csc22905/kinematics_node/trim 0.0916
+```
+
+## Python Code (Hello from My_Robot) location
+
+The Hello from My_Robot code can be found at:
+```
+packages/my_package/my_script.py
+```
+
+## Getting Started
+
+1. Ensure you're connected to the Duckienet wifi network
+2. Verify robot connectivity using `ping csc22905.local`
+3. Start with basic keyboard control to test robot operation
+4. Perform camera calibrations if needed
+5. Run demos or custom code as required
+
+## Support
+
+For issues related to:
+- Robot hardware: Check the Duckiebot DB21M manual: https://docs.duckietown.com/daffy/opmanual-duckiebot/intro.html
+- Software: Refer to the Duckietown documentation: https://docs.duckietown.com/daffy/
