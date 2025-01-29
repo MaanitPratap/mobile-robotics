@@ -78,7 +78,7 @@ docker -H csc22905.local run -it --rm --net=host duckietown/mobile-robotics:v3-a
 rosparam set /csc22905/kinematics_node/trim 0.0916
 ```
 
-## Python Code (Hello from My_Robot) location
+## Exercise 1 Python Code (Hello from My_Robot) location
 
 The Hello from My_Robot code can be found at:
 ```
